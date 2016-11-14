@@ -1,0 +1,30 @@
+<div class="pages">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-5">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Flight Information</h3>
+          </div>
+          <div class="panel-body">
+            <p>Flight Code: <strong><%= @selected_flight.flight_code %></strong></p>
+            <p>Airline: <strong><%= @selected_flight.airline_name %></strong></p>
+            <p>Departure: <strong><%= @selected_flight.departure_airport.name %></strong></p>
+            <p>Destination: <strong><%= @selected_flight.arrival_airport.name %></strong></p>
+            <p>Take Off Date: <strong><%= @selected_flight.departure_date.try(:strftime, "%d - %m - %Y") %></strong></p>
+            <p>Take Off Time: <strong><%= @selected_flight.departure_date.try(:strftime, '%l:%M%P') %></strong></p>
+            <p>Cost/Passenger: <strong class="cost"><%= number_to_currency(@selected_flight.price, locale: :us) %></strong></p>
+            <p>Passenger(s): <strong class="pass_num"><%= params[:number_of_passengers].to_i %></strong></p>
+            <p>Total Cost: <strong class="total"><%= number_to_currency((@selected_flight.price * params[:number_of_passengers].to_i ), locale: :us)%></strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <%= render 'booking_form' %>
+      </div>
+
+    </div>
+  </div>
+</div>

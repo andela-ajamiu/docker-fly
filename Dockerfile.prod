@@ -1,0 +1,19 @@
+FROM centurylink/alpine-rails
+
+RUN mkdir /app
+
+WORKDIR /app
+
+COPY Gemfile Gemfile.lock ./
+
+RUN gem install bundler && bundle config github.https true && bundle install --jobs 20 --retry 5 --without development test
+
+ENV RAILS_ENV production
+
+ENV RACK_ENV production
+
+COPY . ./
+
+RUN bundle exec rake assets:precompile
+
+CMD bundle exec puma -C config/puma.rb

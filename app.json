@@ -1,0 +1,8 @@
+{
+  "name": "UltraFly",
+  "description": "A Flight Booking application in rails",
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
